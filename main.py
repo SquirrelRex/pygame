@@ -2,7 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
-import player
+from player import Player
 import circleshape
 from constants import *
 
@@ -12,19 +12,19 @@ def main():
     dt = 0
     tt = 0
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    plr = player.Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     
     while True:
         dt = clock.tick(60)/1000
         tt += dt
-        plr.update(dt)
+        player.update(dt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 print(f"Mission complete! You survived {tt:.2f} seconds")
                 return
             
         screen.fill("black")
-        plr.draw(screen)
+        player.draw(screen)
         pygame.display.flip()
 
 
