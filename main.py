@@ -32,13 +32,14 @@ def main():
             if player.collision(asteroid):
                 print("Game over!")
                 sys.exit()
+            for shot in shots:
+                if shot.collision(asteroid):
+                    asteroid.split()
+                    shot.kill()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 print(f"Mission complete! You survived {tt:.2f} seconds")
-                return
-            #elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                #new_shot = player.shoot(shots)
-            
+                return            
         screen.fill("black")
         for obj in drawable:
             obj.draw(screen)
