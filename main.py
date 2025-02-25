@@ -5,6 +5,7 @@ from player import Player
 import circleshape
 from constants import *
 from asteroid import Asteroid
+from shot import Shot
 
 def main():
     pygame.init()
@@ -13,6 +14,8 @@ def main():
     updateable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
+    Shot.containers = (drawable, updateable, shots)
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroids, updateable, drawable)
     AsteroidField.containers = (updateable)
@@ -33,6 +36,8 @@ def main():
             if event.type == pygame.QUIT:
                 print(f"Mission complete! You survived {tt:.2f} seconds")
                 return
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                new_shot = player.shoot(shots)
             
         screen.fill("black")
         for obj in drawable:
